@@ -1,0 +1,143 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    max-width: 430px;
+    width: 100%;
+    max-height: fit-content;
+    height: 100%;
+    align-items: center;
+    padding-right: 35px;
+    padding-left: 35px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+    padding-bottom: 20px;
+}
+
+
+.form__title {
+    font-family: "My Inter Black";
+    font-size: 24px;
+    font-weight: 900;
+    text-align: left;
+    color: black;
+    max-width: 358px;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 54px;
+    margin-top: 34px;
+}
+
+#form-trash-title.form__title {
+    margin-bottom: 22px;
+    margin-top: 34px;
+    
+}
+
+
+.form__field {
+    color: rgba(196, 196, 196, 1);
+    width: 358px;
+    background-color: transparent;
+    margin-bottom: 20px;
+}
+
+.form__input {
+    width: 100%;
+    height: 27.26px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid rgba(196, 196, 196, 1);
+    padding: 0;
+}
+
+.form__input_type_error {
+    border-bottom: 1px solid #f00;
+  }
+
+
+.form__input:focus {
+    outline: none;
+}
+
+.form__input::placeholder,
+textarea::placeholder {
+    color: rgba(196, 196, 196, 1);
+}
+
+.form__input:focus::placeholder,
+textarea:focus::placeholder {
+    color: rgba(196, 196, 196, 1);
+}
+
+
+.form__save {
+    /* Cambiar estas propiedades del botón cuando haya texto */
+    color: white;
+    border: none;
+    background-color: black;
+    /* Mantener estas propiedades del botón igual */
+    max-width: 358px;
+    width: 100%;
+    padding: 16px 0px;
+    margin-bottom: 36.51px;
+    margin-top: 22px;
+    border-radius: 2px;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.form__save_inactive {
+    color: rgba(196, 196, 196, 1);
+    border: 1px solid rgba(196, 196, 196, 1);
+    background-color: transparent;
+    
+}
+
+.form__save.dynamic:hover {
+    opacity: 80%;
+}
+
+.form__input-error {
+    position: relative; 
+    color: red; 
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;   
+    margin-top: 6px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 728px) {
+    .form {
+        padding: 0 22px;
+    }
+    .form__title {
+        font-size: 18px;
+        margin-bottom: 76px;
+        margin-top: 25px;
+    }
+
+    .form__save {
+        padding: 14px 0px;
+        margin-bottom: 25px;
+        border-radius: 2px;
+        font-size: 14px;
+    }  
+      
+    .form__field {
+        width: 282px;
+        margin-bottom: 20px;
+    }
+
+    .form__input-error { 
+        width: 282px;
+        position: absolute;
+    }
+}
