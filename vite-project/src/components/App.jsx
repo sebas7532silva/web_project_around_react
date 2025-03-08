@@ -15,6 +15,7 @@ function App() {
     <div className="page">
       {/* Pasamos setEditImageOpen para manejar el formulario de avatar */}
       <Header
+        isAuthorFormOpen={isAuthorFormOpen} // Pass the state to Header
         setAuthorFormOpen={setAuthorFormOpen}
         setPlacesFormOpen={setPlacesFormOpen}
         setEditImageOpen={setEditImageOpen} // Pasamos esta función aquí

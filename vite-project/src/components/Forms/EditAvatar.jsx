@@ -1,6 +1,7 @@
 export default function EditAvatar() {
     return (
       <form className="form" id="form-image" noValidate>
+        <h2 className="form__title">Editar imagen</h2>
         <label className="form__field">
           <input
             type="url"

@@ -1,6 +1,7 @@
 export default function EditProfile() {
     return (
       <form className="form" id="form-author" noValidate>
+        <h2 className="form__title">Editar perfil</h2>
         <label className="form__field">
           <input
             type="text"

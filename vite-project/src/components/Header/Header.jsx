@@ -1,7 +1,13 @@
 import { useState } from "react";
 import EditAvatar from "../Forms/EditAvatar";
+import EditProfile from "../Forms/EditProfile"; // Import the author form component
+import Popup from "../Popup/Popup"; // Import the Popup component
+import NewCard from "../Forms/NewCard";
 
-function Header({ setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
+function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
+  const [isEditImageOpen, setIsEditImageOpen] = useState(false); // Add state for edit image form
+  const [isPlacesFormOpen, setIsPlacesFormOpen] = useState(false); // Add state for places form
+
   return (
     <header className="header">
       <div className="header__logo-container">
@@ -9,24 +15,54 @@ function Header({ setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
       </div>
 
       {/* Lógica para mostrar el popup de edición de avatar */}
-      {setEditImageOpen && (
-        <div className="popup">
-          <div className="popup__container">
-            {/* Botón para cerrar el popup */}
-            <button
-              onClick={() => setEditImageOpen(false)} 
-              className="popup__close"
-            >
-              <img
-                src="../images/close_icon.svg"
-                className="popup__close-icon"
-                alt="Cerrar"
-              />
-            </button>
-            {/* Aquí se renderiza el formulario EditAvatar */}
-            <EditAvatar />
-          </div>
-        </div>
+      {isEditImageOpen && (
+        <Popup>
+          <button
+            onClick={() => setIsEditImageOpen(false)} 
+            className="popup__close"
+          >
+            <img
+              src="../images/close_icon.svg"
+              className="popup__close-icon"
+              alt="Cerrar"
+            />
+          </button>
+          <EditAvatar />
+        </Popup>
+      )}
+
+      {/* Lógica para mostrar el popup de edición de autor */}
+      {isAuthorFormOpen && (
+        <Popup>
+          <button
+            onClick={() => setAuthorFormOpen(false)} 
+            className="popup__close"
+          >
+            <img
+              src="../images/close_icon.svg"
+              className="popup__close-icon"
+              alt="Cerrar"
+            />
+          </button>
+          <EditProfile />
+        </Popup>
+      )}
+
+      {/* Lógica para mostrar el popup de edición de lugares */}
+      {isPlacesFormOpen && (
+        <Popup>
+          <button
+            onClick={() => setIsPlacesFormOpen(false)} 
+            className="popup__close"
+          >
+            <img
+              src="../images/close_icon.svg"
+              className="popup__close-icon"
+              alt="Cerrar"
+            />
+          </button>
+          <NewCard />
+        </Popup>
       )}
 
       <div className="header__content">
@@ -37,7 +73,7 @@ function Header({ setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
             alt="Foto del explorador"
           />
           {/* Botón para abrir el formulario de edición de imagen */}
-          <button onClick={() => setEditImageOpen(true)} className="header__image-edit">
+          <button onClick={() => setIsEditImageOpen(true)} className="header__image-edit">
             <img
               src="../images/author_pen_edit.svg"
               className="header__pen-edit-icon"
@@ -49,7 +85,7 @@ function Header({ setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
           <h1 className="header__author-name">Jacques Cousteau</h1>
           <h2 className="header__author-about">Explorador</h2>
           <button
-            onClick={() => setAuthorFormOpen(true)}
+            onClick={() => setAuthorFormOpen(true)} // Update state to open author form
             className="header__author-edit"
           >
             <img
@@ -59,7 +95,7 @@ function Header({ setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
             />
           </button>
         </div>
-        <button onClick={() => setPlacesFormOpen(true)} className="header__button">
+        <button onClick={() => setIsPlacesFormOpen(true)} className="header__button">
           <img
             src="../images/logo_plus.svg"
             className="header__button-symbol"

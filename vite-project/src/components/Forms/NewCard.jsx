@@ -1,6 +1,7 @@
 export default function NewCard() {
     return (
       <form className="form" id="form-places" noValidate>
+        <h2 className="form__title">Nuevo lugar</h2>
         <label className="form__field">
           <input
             type="text"
