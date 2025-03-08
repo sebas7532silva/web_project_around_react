@@ -1,12 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditAvatar from "../Forms/EditAvatar";
 import EditProfile from "../Forms/EditProfile"; // Import the author form component
 import Popup from "../Popup/Popup"; // Import the Popup component
 import NewCard from "../Forms/NewCard";
 
 function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
-  const [isEditImageOpen, setIsEditImageOpen] = useState(false); // Add state for edit image form
-  const [isPlacesFormOpen, setIsPlacesFormOpen] = useState(false); // Add state for places form
+  const [isEditImageOpen, setIsEditImageOpen] = useState(false); 
+  const [isPlacesFormOpen, setIsPlacesFormOpen] = useState(false);
+
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === "Escape") {
+        // Cerrar el popup de edición de imagen si está abierto
+        if (isEditImageOpen) {
+          setIsEditImageOpen(false);
+        }
+        // Cerrar el popup de edición de autor si está abierto
+        if (isAuthorFormOpen) {
+          setAuthorFormOpen(false);
+        }
+        // Cerrar el popup de edición de lugares si está abierto
+        if (isPlacesFormOpen) {
+          setIsPlacesFormOpen(false);
+        }
+      }
+    };
+
+    // Agregar el listener
+    window.addEventListener("keydown", handleEscKey);
+
+    // Limpiar el listener cuando el componente se desmonte
+    return () => {
+      window.removeEventListener("keydown", handleEscKey);
+    };
+  }, [isEditImageOpen, isAuthorFormOpen, isPlacesFormOpen, setIsEditImageOpen, setAuthorFormOpen, setIsPlacesFormOpen]);
 
   return (
     <header className="header">

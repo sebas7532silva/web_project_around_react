@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Card from "../Card/Card"; // Import the Card component
 
 const cards = [
   {
@@ -43,6 +44,11 @@ function Main() {
           </div>
         </div>
       )}
+      <ul className="places">
+        {cards.map(card => (
+          <Card key={card._id} card={card} />
+        ))}
+      </ul>
     </main>
   );
 }

@@ -1,33 +1,35 @@
-export default function Card({ title, imageUrl }) {
-    return (
-      <li className="card">
-        <img className="card__image" src={imageUrl} alt={title} />
-        <button
-          aria-label="Eliminar tarjeta"
-          className="card__delete-button"
-          type="button"
-        >
-          <img
-            src="../images/delete_icon.svg"
-            className="card__delete-icon"
-            alt="Eliminar"
-          />
+import { useState } from "react";
+import ImagePopup from "../ImagePopup/ImagePopup.jsx";
+
+export default function Card({ card }) {
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+
+  return (
+    <>
+      <div className="places__card">
+        <button className="places__card-trash">
+          <img className="places__card-trash-icon" src="../images/trash.svg" alt="Trash" />
         </button>
-        <div className="card__description">
-          <h2 className="card__title">{title}</h2>
-          <button
-            aria-label="Me gusta"
-            type="button"
-            className="card__like-button"
-          >
-            <img
-              src="../images/like_icon.svg"
-              className="card__like-icon"
-              alt="Me gusta"
-            />
+        <img
+          className="places__card-image"
+          src={card.link}
+          alt={card.name}
+          onClick={() => setIsImagePopupOpen(true)}
+        />
+        <div className="places__card-info">
+          <p className="places__card-title">{card.name}</p>
+          <button className="places__card-button">
+            <img src="../images/like.svg" alt="Like" className="places__card-like" />
           </button>
         </div>
-      </li>
-    );
-  }
+      </div>
+      {isImagePopupOpen && (
+        <ImagePopup
+          card={card}
+          onClose={() => setIsImagePopupOpen(false)}
+        />
+      )}
+    </>
+  );
+}
   
