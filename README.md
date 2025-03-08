@@ -1,1 +1,2 @@
 # Tripleten web_project_around_react
+Proyecto realizado por Freddy Silva. Incluye una refactorización de un proyecto pasado, solo que ahora esta escrito en código de React. React permite el uso de sus componentes para un mejor rendimiento de la aplicación web. 
