@@ -103,6 +103,7 @@ function App() {
         console.error("Error al agregar tarjeta", err);
       });
     })();
+    handleClosePopup();
   };
   
 
@@ -111,7 +112,7 @@ function App() {
       <div className="page">
         <Header
           user={currentUser || {}}
-          isAuthorFormOpen={isAuthorFormOpen}
+          
           isEditImageOpen={isEditImageOpen}
           isPlacesFormOpen={isPlacesFormOpen}
           setAuthorFormOpen={setAuthorFormOpen}
@@ -124,7 +125,9 @@ function App() {
           cards={cards}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
-          
+          isPlacesFormOpen={isPlacesFormOpen}
+          isAuthorFormOpen={isAuthorFormOpen}
+          handleClosePopup={handleClosePopup}     
         />
           
         <Footer />

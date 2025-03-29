@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import EditAvatar from "../Forms/EditAvatar";
-import EditProfile from "../Forms/EditProfile"; // Import the author form component
 import Popup from "../Popup/Popup"; // Import the Popup component
-import NewCard from "../Forms/NewCard";
 
-function Header({ isAuthorFormOpen, setAuthorFormOpen, isPlacesFormOpen, setPlacesFormOpen, isEditImageOpen, setEditImageOpen, handleClosePopup, onAddPlaceSubmit, user}) {
+function Header({ setPlacesFormOpen, setAuthorFormOpen, isEditImageOpen, setEditImageOpen, handleClosePopup, user}) {
 
   useEffect(() => {
     const handleEscKey = (e) => {
@@ -20,7 +18,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, isPlacesFormOpen, setPlac
     return () => {
       window.removeEventListener("keydown", handleEscKey);
     };
-  }, [isAuthorFormOpen, isPlacesFormOpen, isEditImageOpen]);
+  }, [isEditImageOpen]);
 
   return (
     <header className="header">
@@ -42,40 +40,6 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, isPlacesFormOpen, setPlac
             />
           </button>
           <EditAvatar />
-        </Popup>
-      )}
-
-      {/* Lógica para mostrar el popup de edición de autor */}
-      {isAuthorFormOpen && (
-        <Popup>
-          <button
-            onClick={() => handleClosePopup()} // Cerrar el popup
-            className="popup__close"
-          >
-            <img
-              src="../images/close_icon.svg"
-              className="popup__close-icon"
-              alt="Cerrar"
-            />
-          </button>
-          <EditProfile />  {/* Aquí renderizas el formulario de edición de perfil */}
-        </Popup>
-      )}
-
-      {/* Lógica para mostrar el popup de edición de lugares */}
-      {isPlacesFormOpen && (
-        <Popup>
-          <button
-            onClick={() => handleClosePopup()} // Cerrar el popup
-            className="popup__close"
-          >
-            <img
-              src="../images/close_icon.svg"
-              className="popup__close-icon"
-              alt="Cerrar"
-            />
-          </button>
-          <NewCard onAddPlaceSubmit={onAddPlaceSubmit}/>
         </Popup>
       )}
 
