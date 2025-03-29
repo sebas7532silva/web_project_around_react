@@ -1,28 +1,15 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import EditAvatar from "../Forms/EditAvatar";
 import EditProfile from "../Forms/EditProfile"; // Import the author form component
 import Popup from "../Popup/Popup"; // Import the Popup component
 import NewCard from "../Forms/NewCard";
 
-function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEditImageOpen }) {
-  const [isEditImageOpen, setIsEditImageOpen] = useState(false); 
-  const [isPlacesFormOpen, setIsPlacesFormOpen] = useState(false);
+function Header({ isAuthorFormOpen, setAuthorFormOpen, isPlacesFormOpen, setPlacesFormOpen, isEditImageOpen, setEditImageOpen, handleClosePopup, onAddPlaceSubmit, user}) {
 
   useEffect(() => {
     const handleEscKey = (e) => {
       if (e.key === "Escape") {
-        // Cerrar el popup de edición de imagen si está abierto
-        if (isEditImageOpen) {
-          setIsEditImageOpen(false);
-        }
-        // Cerrar el popup de edición de autor si está abierto
-        if (isAuthorFormOpen) {
-          setAuthorFormOpen(false);
-        }
-        // Cerrar el popup de edición de lugares si está abierto
-        if (isPlacesFormOpen) {
-          setIsPlacesFormOpen(false);
-        }
+        handleClosePopup();
       }
     };
 
@@ -33,7 +20,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
     return () => {
       window.removeEventListener("keydown", handleEscKey);
     };
-  }, [isEditImageOpen, isAuthorFormOpen, isPlacesFormOpen, setIsEditImageOpen, setAuthorFormOpen, setIsPlacesFormOpen]);
+  }, [isAuthorFormOpen, isPlacesFormOpen, isEditImageOpen]);
 
   return (
     <header className="header">
@@ -45,7 +32,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
       {isEditImageOpen && (
         <Popup>
           <button
-            onClick={() => setIsEditImageOpen(false)} 
+            onClick={() => handleClosePopup()} // Cerrar el popup
             className="popup__close"
           >
             <img
@@ -62,7 +49,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
       {isAuthorFormOpen && (
         <Popup>
           <button
-            onClick={() => setAuthorFormOpen(false)} 
+            onClick={() => handleClosePopup()} // Cerrar el popup
             className="popup__close"
           >
             <img
@@ -71,7 +58,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
               alt="Cerrar"
             />
           </button>
-          <EditProfile />
+          <EditProfile />  {/* Aquí renderizas el formulario de edición de perfil */}
         </Popup>
       )}
 
@@ -79,7 +66,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
       {isPlacesFormOpen && (
         <Popup>
           <button
-            onClick={() => setIsPlacesFormOpen(false)} 
+            onClick={() => handleClosePopup()} // Cerrar el popup
             className="popup__close"
           >
             <img
@@ -88,19 +75,19 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
               alt="Cerrar"
             />
           </button>
-          <NewCard />
+          <NewCard onAddPlaceSubmit={onAddPlaceSubmit}/>
         </Popup>
       )}
 
       <div className="header__content">
         <div className="header__image-container">
           <img
-            src="../images/Explorer.jpg"
+            src={user.avatar}
             className="header__image"
-            alt="Foto del explorador"
+            alt={user.name}
           />
           {/* Botón para abrir el formulario de edición de imagen */}
-          <button onClick={() => setIsEditImageOpen(true)} className="header__image-edit">
+          <button onClick={() => setEditImageOpen(true)} className="header__image-edit">
             <img
               src="../images/author_pen_edit.svg"
               className="header__pen-edit-icon"
@@ -109,8 +96,8 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
           </button>
         </div>
         <div className="header__author-information">
-          <h1 className="header__author-name">Jacques Cousteau</h1>
-          <h2 className="header__author-about">Explorador</h2>
+          <h1 className="header__author-name">{user.name}</h1>
+          <h2 className="header__author-about">{user.about}</h2>
           <button
             onClick={() => setAuthorFormOpen(true)} // Update state to open author form
             className="header__author-edit"
@@ -122,7 +109,7 @@ function Header({ isAuthorFormOpen, setAuthorFormOpen, setPlacesFormOpen, setEdi
             />
           </button>
         </div>
-        <button onClick={() => setIsPlacesFormOpen(true)} className="header__button">
+        <button onClick={() => setPlacesFormOpen(true)} className="header__button">
           <img
             src="../images/logo_plus.svg"
             className="header__button-symbol"

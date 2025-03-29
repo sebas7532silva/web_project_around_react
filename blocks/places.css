@@ -84,7 +84,7 @@
     opacity: 50%;
 }
 
-.places__card-button.active .places__card-like{
+.places__card-button_is-active{
     content: url("../images/like_active.svg");
 }
 
